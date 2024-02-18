@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./images/gemini.png" type="image/png">
+  <meta name="description" content="A demo of Google's latest vision based AI model, gemini-pro-vision.">
+  <meta name="keywords"
+    content="google, gemini, image-analysis, google-ai, gemini-pro-vision, gpt, chatgpt, ai, llm, gemini-demo, chiroyce">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+    </script>
+
+  <title>Gemini Pro Vision Demo</title>
+</head>
+
+<body>
+  <div class="stuff">
+    <h1>Gemini Pro Vision</h1>
+    <div class="flex">
+      <div class="right">
+        <input type="password" id="api" placeholder="Enter API key (get it from ai.google.dev)" value="AIzaSyAd9tAIvrfGAPEB3l0Zn5TjNYyBF_4nW_c">
+        <textarea id="prompt" placeholder="Enter prompt here" value="" rows="4" cols="40" value="What do you see in this picture? Describe in detail, along with reasoning."></textarea><br>
+        <select id="cameraSelect"></select><br>
+      </div>
+      <div class="left">
+        <video id="webcam" autoplay></video>
+        <button>Analyze Image</button>
+      </div>
+    </div>
+    <br>
+    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+    <p id="response"></p>
+
+  </div>
+  <a href="https://github.com/Chiroyce1/gemini-vision" target="_blank"><img src="./images/github.png" id="github"></a>
+</body>
+
+<script src="./script.js" type="module"></script>
+
+</html>
+
+<!-- copyright @chandan  -->
