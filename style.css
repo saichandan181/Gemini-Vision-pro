@@ -2,8 +2,8 @@
   font-weight: 300;
   font-family: system-ui;
   --primary: #588fec;
-  --bg: #fefcfc;
-  --text: black;
+  --bg:#1c1818;
+  --text: rgb(255, 255, 255);
   --thickness: 1px;
 }
 
@@ -127,6 +127,7 @@ input[type="password"] {
   position: fixed;
   right: 0;
   top: 0;
+  color: #1b1b1b;
   height: 42px;
   margin: 1em;
   cursor: pointer;
