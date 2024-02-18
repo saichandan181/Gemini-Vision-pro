@@ -24,7 +24,10 @@
     border-radius: 50%;
   }
 }
-
+p{
+  text-align: center;
+  
+}
 html {
   margin: 0;
   padding: 0;
@@ -127,7 +130,6 @@ input[type="password"] {
   position: fixed;
   right: 0;
   top: 0;
-  color: #1b1b1b;
   height: 42px;
   margin: 1em;
   cursor: pointer;
