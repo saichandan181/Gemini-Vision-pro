@@ -58,6 +58,12 @@ function setCamera() {
     });
 }
 
+function readText(text) {
+  const speechSynthesis = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(utterance);
+}
+
 async function captureImage() {
   if (active) return;
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -83,13 +89,14 @@ async function captureImage() {
   show("Loading... (this can take upto 30s)");
   let res;
   active = true;
-  try {
-    res = await model.generateContentStream([promptInput.value, image]);
-    let text = "";
-    for await (const chunk of res.stream) {
-      text += chunk.text();
-      show(text);
-    }
+    try {
+      res = await model.generateContentStream([promptInput.value, image]);
+      let text = "";
+      for await (const chunk of res.stream) {
+        text += chunk.text();
+        show(text);
+      }
+      readText(text);
   } catch (e) {
     console.error(e);
     show(`Oops something went wrong.\nError: ${e.toString()}`);
@@ -101,7 +108,7 @@ async function captureImage() {
 }
 
 function dataURItoBlob(dataURI) {
-  // Thanks to ChatGPT for this
+ 
   const byteString = atob(dataURI.split(",")[1]);
   const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
   const arrayBuffer = new ArrayBuffer(byteString.length);
