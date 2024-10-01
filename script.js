@@ -77,38 +77,36 @@ async function captureImage() {
     show("Please provide an API_KEY.");
     return;
   }
-  // Top class error handling
+
   let genAI;
   try {
     genAI = new GoogleGenerativeAI(API_KEY);
   } catch (e) {
     show(`Oops something went wrong.\nError: ${e}`);
-  }
-
-  const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-  show("Loading... (this can take upto 30s)");
-  let res;
-  active = true;
-    try {
-      res = await model.generateContentStream([promptInput.value, image]);
-      let text = "";
-      for await (const chunk of res.stream) {
-        text += chunk.text();
-        show(text);
-      }
-      readText(text);
-  } catch (e) {
-    console.error(e);
-    show(`Oops something went wrong.\nError: ${e.toString()}`);
-    active = false;
     return;
   }
 
-  active = false;
+  // Update model selection to Gemini 1.5 Flash
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" }); 
+  
+  show("Loading... (this can take up to 30s)");
+  active = true;
+
+  try {
+    // Use generateContent instead of generateContentStream for Gemini
+    const res = await model.generateContent([promptInput.value, image]); 
+    const text = res.response.text();
+    show(text);
+    readText(text);
+  } catch (e) {
+    console.error(e);
+    show(`Oops something went wrong.\nError: ${e.toString()}`);
+  } finally {
+    active = false;
+  }
 }
 
 function dataURItoBlob(dataURI) {
- 
   const byteString = atob(dataURI.split(",")[1]);
   const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
   const arrayBuffer = new ArrayBuffer(byteString.length);
